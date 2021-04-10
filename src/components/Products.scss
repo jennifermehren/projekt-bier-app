@@ -1,0 +1,16 @@
+.products-container{
+    .product-card{
+       
+        display: flex;
+        min-height: 250px;
+        border-bottom: 2px solid var(--greyColor);
+        margin: 1.5rem;
+        .img-container{
+            width: 33%;
+        }
+        .product-details{
+            width: 66%;
+        }
+    }
+    color: unset;
+}

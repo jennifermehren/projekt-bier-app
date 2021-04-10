@@ -1,25 +1,65 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  // Link
+} from "react-router-dom";
+import "./App.scss";
+import Main from "./components/Main";
+
+import Nav from "./components/Nav";
+import Products from "./components/Products";
+import Details from "./components/Details";
+
+import axios from "axios";
+import { Component } from "react";
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      beer: [],
+    };
+  }
+  
+  componentDidMount() {
+    axios.get(`https://ih-beers-api2.herokuapp.com/beers`).then((res) => {
+      const beer = res.data;
+      this.setState({ beer });
+    });
+  }
+  
+  getBeer(id) {
+    return this.state.beer.find((mybeer) => mybeer._id === id)
+  }
+
+  getAllBeer() {
+    return this.state.beer;
+  }
+  
+  
+  render() {
+    return (
+      <Router>
+        <div className="App">
+          <Nav />
+          <Switch>
+            <Route exact path="/">
+              <Main />
+            </Route>
+            <Route exact path="/products">
+              <Products beerdata={this.getAllBeer()} />
+            </Route>
+            <Route exact path="/details/:id">
+              {this.state.beer.length&&<Details onebeerdata = {e => this.getBeer(e)}/>}
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    );
+  }
 }
 
 export default App;

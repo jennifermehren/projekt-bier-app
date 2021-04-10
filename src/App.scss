@@ -1,0 +1,16 @@
+body{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    height: fit-content;
+    
+}
+:root{
+    --mainColor: rgb(255,202,65.1);
+    --lightColor: white;
+    --greyColor: rgb(51,51,51,0.5);
+}
+
+.content{
+    min-height: calc(100vh - 70px);
+}

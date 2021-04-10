@@ -1,0 +1,32 @@
+.main-container {
+  margin: 1.5rem;
+  .main-sections {
+    min-height: 40vh;
+    justify-content: center;
+    
+    margin: 0 auto;
+    display: grid;
+
+    .pic-container {
+      display: grid;
+      justify-content: center;
+
+      img {
+        max-width: 100%;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      h1 {
+        background-color: var(--mainColor);
+        color: var(--lightColor);
+        background-color: var(--mainColor);
+        margin-top: 0;
+        padding: 0.3rem;
+      }
+    }
+    p {
+      margin: 0 auto 3rem auto;
+    }
+  }
+}
