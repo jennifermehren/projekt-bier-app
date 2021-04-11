@@ -21,5 +21,11 @@
             bottom: 6px;
             border-radius: 50px;
         }
+        button:hover {
+            left: calc(50% - 53px/2 - 1px);
+            bottom: 5px;
+            font-weight: bold;
+            box-shadow: none;
+          }
     }
 }

@@ -1,44 +1,39 @@
 import React from "react";
-
+import { Component } from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  // Link
 } from "react-router-dom";
-import "./App.scss";
-import Main from "./components/Main";
 
+import "./App.scss";
+
+import { getAllBeers,  
+  getRandomBeer 
+} from "./BeerApi";
+
+import Main from "./components/Main";
 import Nav from "./components/Nav";
 import Products from "./components/Products";
 import Details from "./components/Details";
-
-import axios from "axios";
-import { Component } from "react";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      beer: [],
+      allBeers: [],
+      randomBeer: []
     };
   }
   
   componentDidMount() {
-    axios.get(`https://ih-beers-api2.herokuapp.com/beers`).then((res) => {
-      const beer = res.data;
-      this.setState({ beer });
-    });
-  }
-  
-  getBeer(id) {
-    return this.state.beer.find((mybeer) => mybeer._id === id)
+    getAllBeers().then(data => this.setState({allBeers: data}));
+    getRandomBeer().then(data => this.setState({randomBeer: data}));
   }
 
-  getAllBeer() {
-    return this.state.beer;
-  }
-  
+  getMyBeer(id) {
+    return this.state.allBeers.find((mybeer) => mybeer._id === id)
+  } 
   
   render() {
     return (
@@ -50,10 +45,13 @@ class App extends Component {
               <Main />
             </Route>
             <Route exact path="/products">
-              <Products beerdata={this.getAllBeer()} />
+              <Products data = {this.state.allBeers} />
             </Route>
             <Route exact path="/details/:id">
-              {this.state.beer.length&&<Details onebeerdata = {e => this.getBeer(e)}/>}
+              {this.state.allBeers.length&&<Details data = {e => this.getMyBeer(e)}/>}
+            </Route>
+            <Route path="/random/">
+              <Details data = {this.state.randomBeer} />
             </Route>
           </Switch>
         </div>

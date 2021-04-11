@@ -1,21 +1,35 @@
 import "./Products.scss";
+
 import {
-    // BrowserRouter as Router,
-    // Switch,
-    // Route,
-    Link
-  } from "react-router-dom";
+  // BrowserRouter as Router,
+  // Switch,
+  // Route,
+  Link,
+} from "react-router-dom";
+import Searchbar from "./Searchbar";
 const Products = (props) => {
   return (
     <div className="content products-container">
-      <div className="product-card">
-        {props.beerdata.map((item, i) => (
-          <div key={i} className="product-container">
-            {item.name}
-           <div className="product-details"> <Link to={"/details/"+item._id} >details </Link></div>
+      <Searchbar />
+      {props.data.map((item, i) => (
+        <div key={i} className="product-card">
+          <div className="img-container">
+            <img src={item.image_url} alt="product-img Beer" />
           </div>
-        ))}
-      </div>
+          <div className="product-details">
+            <h1>{item.name}</h1>
+            <h2>{item.tagline}</h2>
+            <p>Created by: {item.name}</p>
+            <Link
+              className="goToDetailsBtn button btnHover"
+              to={"/details/" + item._id}
+            >
+              Details{" "}
+            </Link>
+          </div>
+        </div>
+      ))}
+      <div className="platzhalterNavbar"></div>
     </div>
   );
 };
