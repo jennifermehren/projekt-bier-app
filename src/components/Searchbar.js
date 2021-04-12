@@ -1,17 +1,19 @@
-const Searchbar = () => {
-    return ( 
-        <div className="searchbar-container">
-            <figure className="searchbar">
-            <input
-            className="input"
-            type="text"
-            name="searchfield"
-            placeholder="search beer"
-          ></input>
-            </figure>
+// import { useState } from "react";
 
-        </div>
-     );
-}
- 
+const Searchbar = (props) => {
+  
+  return (
+    <div className="searchbar-container">
+      <figure className="searchbar">
+        <input   onInput={e => props.search(e.target.value.toLowerCase())}
+          className="input"
+          type="text"
+          name="searchfield"
+          placeholder="search beer"
+        ></input>
+      </figure>
+    </div>
+  );
+};
+
 export default Searchbar;

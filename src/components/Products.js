@@ -7,11 +7,23 @@ import {
   Link,
 } from "react-router-dom";
 import Searchbar from "./Searchbar";
+import { useState, useEffect } from "react";
+
 const Products = (props) => {
+  const [beers, setBeers] = useState(props.data);
+
+  useEffect(() => setBeers(props.data), [props.data]);
+  
+  const searchBeers = (search) => {
+    setBeers(
+      props.data.filter((item) => item.name.toLowerCase().includes(search))
+    );
+  };
+  console.log(beers);
   return (
     <div className="content products-container">
-      <Searchbar />
-      {props.data.map((item, i) => (
+      <Searchbar search={searchBeers} />
+      {beers.map((item, i) => (
         <div key={i} className="product-card">
           <div className="img-container">
             <img src={item.image_url} alt="product-img Beer" />
